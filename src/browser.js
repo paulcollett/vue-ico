@@ -1,12 +1,12 @@
 import library  from '../lib/icons-browser';
 
 var VueIcoSvg = function(name, s, c) {
-  nameCamelCase = name.replace(/_([a-z])/g, (a, b) => b.toUpperCase());
+  var nameCamelCase = name.replace(/[_-]([a-z])/g, function(a, b) { return b.toUpperCase() });
   var src = library[nameCamelCase];
 
   if(!src) {
-    console.error('[VueIco] No Icon "%s"', src);
-    return;
+    console.error('[VueIco] No Icon "%s"', nameCamelCase, 'Library: https://material.io/icons/');
+    return '[?]';
   }
 
   return '<svg fill="' + (c || 'currentcolor') + '" width="' + (s || 24) + '" height="' + (s || 24) + '" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">' + src + '</svg>';
@@ -22,8 +22,8 @@ Plugin.install = function (Vue, options) {
   var namespace = (options && options.name) || 'ico';
 
   Vue.directive(namespace, {
-    bind: (el, binding) => {
-      el.outerHTML = VueIcoSvg(binding.arg, Object.keys(binding.modifier).pop(), (binding.value || {}).color);
+    inserted: function(el, binding) {
+      el.outerHTML = VueIcoSvg(binding.arg || '', binding.modifier, (binding.value || {}).color);
     }
   });
 
@@ -41,9 +41,9 @@ Plugin.install = function (Vue, options) {
       },
     },
     render: function (createElement) {
-      return createElement(renderImage ? 'img' : 'span', {
+      return createElement('span', {
         directives: [{
-          name: 'dummy-self',
+          name: namespace,
           value: {color: this.color},
           arg: this.name,
           modifier: this.size
@@ -57,4 +57,4 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(Plugin);
 }
 
-module.exports = Plugin;
+export default Plugin;

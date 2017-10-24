@@ -1,7 +1,7 @@
 {
   "name": "vue-ico",
   "version": "0.0.3",
-  "description": "Simple Google Material Icons for Vue.js Projects",
+  "description": "Dead easy, Google Material Icons for Vue.js Projects",
   "main": null,
   "unpkg": "dist/vue-ico.browser.js",
   "jsdelivr": "dist/vue-ico.browser.js",
@@ -25,6 +25,7 @@
   "devDependencies": {
     "glob": "^7.1.2",
     "material-design-icons": "^3.0.1",
-    "rollup": "^0.50.0"
+    "rollup": "^0.50.0",
+    "serve": "^6.3.1"
   }
 }
