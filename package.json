@@ -2,8 +2,15 @@
   "name": "vue-ico",
   "version": "0.0.1",
   "description": "Simple Google Material Icons for Vue.js Projects",
-  "main": "src/index.js",
+  "main": null,
+  "unpkg": "dist/vue-ico.browser.js",
+  "jsdelivr": "dist/vue-ico.browser.js",
+  "module": "dist/vue-ico.module.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "node ./build/library.js && node ./build/build.js"
   },
   "repository": {
     "type": "git",
@@ -14,5 +21,10 @@
   "bugs": {
     "url": "https://github.com/paulcollett/vue-ico/issues"
   },
-  "homepage": "https://github.com/paulcollett/vue-ico#readme"
+  "homepage": "https://github.com/paulcollett/vue-ico#readme",
+  "devDependencies": {
+    "glob": "^7.1.2",
+    "material-design-icons": "^3.0.1",
+    "rollup": "^0.50.0"
+  }
 }
