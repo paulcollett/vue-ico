@@ -38,6 +38,10 @@ Import as the icon name (prefixed with ico) as camel case
 </ul>
 ```
 
+### Example
+
+http://paulcollett.github.io/vue-ico/demo/
+
 ### Need anything more?
 
 We're aiming for simplicity with this package, that means, ready-to-go browser support and simplistic bundling. If you need more control and willing to get your hands dirty around your bundler, take a look at this comprehensive library:
