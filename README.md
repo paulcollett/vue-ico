@@ -8,7 +8,7 @@ This package's aim is to get icons into your Vue.js project as quick as possible
 **Dead simple Icons**
 ```HTML
 <script src="//unpkg.com/vue"></script>
-<script src="//unpkg.com/vue-icon"></script>
+<script src="//unpkg.com/vue-ico"></script>
 ```
 ```HTML
 <ul>
@@ -25,10 +25,12 @@ Specify the icon name as kebab or camel case
 - Simply outputs the svg
 - Bundles only the icons you need
 
+`npm install vue-ico --save-dev`
+
 ```JS
 import {icoComment, icoPlaylistAdd} from 'vue-ico'
 ```
-Import as the icon name (prefixed with ico) as camel case
+Import the icon name, prefixed with `ico`, in camelCase
 (library: https://material.io/icons/)
 
 ```HTML
