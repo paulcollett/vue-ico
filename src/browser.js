@@ -1,6 +1,6 @@
 import library  from '../lib/icons-browser';
 
-var VueIcoSvg = function(name, s, c) {
+const VueIcoSvg = function(name, s, c) {
   var nameCamelCase = name.replace(/[_-]([a-z])/g, function(a, b) { return b.toUpperCase() });
   var src = library[nameCamelCase];
 
@@ -12,7 +12,7 @@ var VueIcoSvg = function(name, s, c) {
   return '<svg fill="' + (c || 'currentcolor') + '" width="' + (s || 24) + '" height="' + (s || 24) + '" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">' + src + '</svg>';
 }
 
-var Plugin = function () {}
+const Plugin = function () {}
 
 Plugin.install = function (Vue, options) {
   if (Plugin.installed) {

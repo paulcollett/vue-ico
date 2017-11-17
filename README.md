@@ -28,8 +28,14 @@ Specify the icon name as kebab or camel case
 `npm install vue-ico --save-dev`
 
 ```JS
-import {icoComment, icoPlaylistAdd} from 'vue-ico'
+import VueIco, {icoClose, icoKeyboardArrowDown, icoKeyboardArrowRight} from 'vue-ico'
+
+Vue.use(VueIco, {
+  "close": icoClose,
+  "down": icoKeyboardArrowDown
+});
 ```
+
 Import the icon name, prefixed with `ico`, in camelCase
 (library: https://material.io/icons/)
 
