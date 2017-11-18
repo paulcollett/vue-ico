@@ -1,6 +1,6 @@
 {
   "name": "vue-ico",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Dead easy, Google Material Icons for Vue.js Projects",
   "main": null,
   "unpkg": "dist/vue-ico.browser.js",

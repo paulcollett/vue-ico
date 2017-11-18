@@ -44,14 +44,14 @@ Also, you'll need to allow `vue-ico` module to be parsed by your webpack JS load
 ```JS
 exclude: /node_modules/
 ```
-to this, will exclude all node modules but allow vue-ico to be stripped of dead code:
+to this, will continue to exclude all node modules except for `vue-ico`:
 ```JS
 exclude: /node_modules\/(?!(vue-ico)\/).*/
 ```
-Example of `webpack.config.js` with "tree shaking" setup:
+Example of `webpack.config.js` with this "tree shaking" setup:
 https://github.com/paulcollett/vue-ico/blob/master/webpack-example.md
 
-Now when building webpack with the production flag (`webpack -p`) only the used `vue-ico` icons will be bundled. This also has the added benefits of allowing you to use ES6 modules (and tree-shaking) across your project
+Now when building webpack with the production flag (`webpack -p`) only the used `vue-ico` icons will be included in your final JS bundle. This also has the added benefits of allowing you to use ES6 modules (and tree-shaking) across your project
 
 ### Bundling Usage
 

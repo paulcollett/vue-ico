@@ -28,8 +28,8 @@ Plugin.install = function (Vue, options) {
 
       if(icoFn) {
         el.outerHTML = icoFn.call(null, binding.modifier, (binding.value || {}).color);
-      } else if(Vue.util && Vue.util.warn) {
-        Vue.util.warn(`[VueIco] ${errorMessage}`)
+      } else if(Vue.config.productionTip) {
+        console.error('[VueIco]', errorMessage, 'Library: https://material.io/icons/'); // could use vue.util.warn
         el.outerHTML = `[?]<!-- ${errorMessage} -->`;
       } else {
         el.outerHTML = `<!-- ${errorMessage} -->`;
