@@ -1,5 +1,5 @@
 /*!
- * vue-ico v1.0.13
+ * vue-ico v1.0.14
  * https://github.com/paulcollett/vue-ico
  * Released under the MIT License.
  */
