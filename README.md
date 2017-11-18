@@ -20,11 +20,13 @@ This package's aim is to get icons into your Vue.js project as quick as possible
 Specify the icon name as kebab or camel case
 (library: https://material.io/icons/)
 
+**That's it!**
+
 ### Example
 
 http://paulcollett.github.io/vue-ico/demo/
 
-### Bundling?
+## Bundling?
 
 - Simply outputs the svg
 - Bundles only the icons you need
@@ -33,7 +35,7 @@ First off install the `vue-ico` package `npm install vue-ico --save-dev`
 
 **Configure webpack to support "tree-shaking"** to remove _dead code_ (and unused icons)
 
-When using babel as you JS loader, make sure we're not compiling to commonjs modules by passing `{ modules: false }` as an option.
+When using babel as your JS loader, make sure we're not compiling to commonjs modules by passing `{ modules: false }` as an option.
 ```JS
 presets: [ ['es2015', { modules: false }] ]
 ```
@@ -46,12 +48,14 @@ to this, will exclude all node modules but allow vue-ico to be stripped of dead 
 ```JS
 exclude: /node_modules\/(?!(vue-ico)\/).*/
 ```
-Setup & "tree shaking" `webpack.config.js` example:
+Example of `webpack.config.js` with "tree shaking" setup:
 https://github.com/paulcollett/vue-ico/blob/master/webpack-example.md
 
-Now when building webpack with the production flag (`webpack -p`) only the used `vue-ico` icons will be bundled. This also has the added benefits of of allowing you to use ES6 modules (and tree-shaking) across your project
+Now when building webpack with the production flag (`webpack -p`) only the used `vue-ico` icons will be bundled. This also has the added benefits of allowing you to use ES6 modules (and tree-shaking) across your project
 
-#### Bundling Usage
+### Bundling Usage
+
+Import the icon name, prefixed with `ico`, in camelCase (library: https://material.io/icons/)
 
 ```JS
 import VueIco, {icoClose, icoKeyboardArrowDown} from 'vue-ico'
@@ -61,9 +65,6 @@ Vue.use(VueIco, {
   "down": icoKeyboardArrowDown
 });
 ```
-
-Import the icon name, prefixed with `ico`, in camelCase
-(library: https://material.io/icons/)
 
 ```HTML
 <ul>

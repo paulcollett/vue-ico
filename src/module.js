@@ -16,17 +16,23 @@ Plugin.install = function (Vue, options) {
   Vue.directive(namespace, {
     inserted: function(el, binding) {
       let icoFn = null;
+      let errorMessage = '';
 
       if(typeof binding.arg === 'function') {
         icoFn = binding.arg;
+        errorMessage = 'Unknown Icon Function' + (icoFn.name ? ` ${icoFn.name}` : '');
       } else if(typeof binding.arg === 'string') {
         icoFn = options[binding.arg] || null;
+        errorMessage = `Unknown Icon: ${binding.arg}`;
       }
 
       if(icoFn) {
         el.outerHTML = icoFn.call(null, binding.modifier, (binding.value || {}).color);
+      } else if(Vue.util && Vue.util.warn) {
+        Vue.util.warn(`[VueIco] ${errorMessage}`)
+        el.outerHTML = `[?]<!-- ${errorMessage} -->`;
       } else {
-        el.outerHTML = '[?]';
+        el.outerHTML = `<!-- errorMessage -->`;
       }
     }
   });

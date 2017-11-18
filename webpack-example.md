@@ -4,9 +4,9 @@ Install Webpack
 
 `npm install --save-dev webpack`
 
-Install babel to transpile ES6 Javascript to browser ready code
+Install Babel to transpile ES6 Javascript to browser ready code
 
-`npm install --save-dev babel-core babel-loader babel-preset-es2015``
+`npm install --save-dev babel-core babel-loader babel-preset-es2015`
 
 Create your `webpack.config.json`
 
@@ -26,7 +26,7 @@ module.exports = {
         exclude: /node_modules\/(?!(vue-ico)\/).*/, // Exclude all node_modules except for vue-ico
         loader: 'babel', // Use Babel (short for ‘babel-loader’) on JS files
         query: {
-          presets: [['es2015', { modules: false }]], // Use es2015 plugin to covert code (excluding modules)
+          presets: [['es2015', { modules: false }]], // Use es2015 plugin to convert code (excluding modules)
           // Note: { modules: false } is required for dead code removal
           plugins: [], // Any additional babel plugins
         }
