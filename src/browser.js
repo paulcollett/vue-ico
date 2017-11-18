@@ -41,12 +41,14 @@ Plugin.install = function (Vue, options) {
       },
     },
     render: function (createElement) {
+      var _this = this;
+
       return createElement('span', {
         directives: [{
           name: namespace,
-          value: {color: this.color},
-          arg: this.name,
-          modifier: this.size
+          value: {color: _this.color},
+          arg: _this.name,
+          modifier: _this.size
         }]
       });
     }

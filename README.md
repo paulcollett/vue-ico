@@ -27,8 +27,21 @@ Specify the icon name as kebab or camel case
 
 `npm install vue-ico --save-dev`
 
+Configure webpack to support "tree-shaking" to remove _dead code_ (and unused icons):
+http://2ality.com/2015/12/webpack-tree-shaking.html
+
+Note: You'll need to allow `vue-ico` module to be parsed by your webpack JS loader. Commonly all node_modules are excluded from parsing so changing this line:
 ```JS
-import VueIco, {icoClose, icoKeyboardArrowDown, icoKeyboardArrowRight} from 'vue-ico'
+exclude: /node_modules/
+```
+to this will do the trick:
+```JS
+exclude: /node_modules\/(?!(vue-ico)\/).*/
+```
+_...let me know if this needs clarifying_
+
+```JS
+import VueIco, {icoClose, icoKeyboardArrowDown} from 'vue-ico'
 
 Vue.use(VueIco, {
   "close": icoClose,
@@ -41,8 +54,8 @@ Import the icon name, prefixed with `ico`, in camelCase
 
 ```HTML
 <ul>
-  <li>{icoComment(24)}</li> <!-- function that takes the icon size -->
-  <li>{icoPlaylistAdd(18, '#f00')}</li> <!-- red icon -->
+  <li><ico name="close"></ico></li>
+  <li><ico name="down" size="18" color="#f00"></ico></li> <!-- red icon -->
 </ul>
 ```
 

@@ -1,5 +1,5 @@
-const icoWrapper = function(svg, size, color) {
-  return '<svg fill="' + (c || 'currentcolor') + '" width="' + (s || 24) + '" height="' + (s || 24) + '" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">${svg}</svg>';
+const icoWrapper = function(svg, s, c) {
+  return '<svg fill="' + (c || 'currentcolor') + '" width="' + (s || 24) + '" height="' + (s || 24) + '" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">' + svg + '</svg>';
 };
 
 const Plugin = function () {};
@@ -9,7 +9,9 @@ Plugin.install = function (Vue, options) {
     return;
   }
 
-  var namespace = (options && options.name) || 'ico';
+  options = options || {};
+
+  var namespace = options.namespace || 'ico';
 
   Vue.directive(namespace, {
     inserted: function(el, binding) {
@@ -22,9 +24,9 @@ Plugin.install = function (Vue, options) {
       }
 
       if(icoFn) {
-        el.outerHTML = icoFn(binding.modifier, (binding.value || {}).color);
+        el.outerHTML = icoFn.call(null, binding.modifier, (binding.value || {}).color);
       } else {
-        el.outerHTML = icoFn;
+        el.outerHTML = '[?]';
       }
     }
   });
@@ -43,12 +45,14 @@ Plugin.install = function (Vue, options) {
       },
     },
     render: function (createElement) {
+      var _this = this;
+
       return createElement('span', {
         directives: [{
           name: namespace,
-          value: {color: this.color},
-          arg: this.name,
-          modifier: this.size
+          value: {color: _this.color},
+          arg: _this.name,
+          modifier: _this.size
         }]
       });
     }
