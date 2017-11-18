@@ -29,18 +29,16 @@ http://paulcollett.github.io/vue-ico/demo/
 - Simply outputs the svg
 - Bundles only the icons you need
 
-First off install the `vue-ico` package
+First off install the `vue-ico` package `npm install vue-ico --save-dev`
 
-`npm install vue-ico --save-dev`
+**Configure webpack to support "tree-shaking"** to remove _dead code_ (and unused icons)
 
-**Configure webpack to support "tree-shaking"** to remove _dead code_ (and unused icons):
-
-When using babel as you JS loader, make sure we're not compiling to commonJs modules by passing `{ modules: false }` as an option.
+When using babel as you JS loader, make sure we're not compiling to commonjs modules by passing `{ modules: false }` as an option.
 ```JS
 presets: [ ['es2015', { modules: false }] ]
 ```
 
-Also, you'll need to allow `vue-ico` module to be parsed by your webpack JS loader to shake off unused icons. Commonly the `node_modules` folder is excluded from parsing so changing this line:
+Also, you'll need to allow `vue-ico` module to be parsed by your webpack JS loader to shake off unused icons. Commonly the whole `node_modules` folder is excluded from parsing so changing this line:
 ```JS
 exclude: /node_modules/
 ```
@@ -49,9 +47,9 @@ to this, will exclude all node modules but allow vue-ico to be stripped of dead 
 exclude: /node_modules\/(?!(vue-ico)\/).*/
 ```
 Setup & "tree shaking" `webpack.config.js` example:
-https://github.com/paulcollett/vue-ico/blob/master/
+https://github.com/paulcollett/vue-ico/blob/master/webpack-example.md
 
-Now when building webpack with the production flag (`webpack -p`) only the used `vue-ico` icons will be bundled with the added benefits of being able to use ES6 modules (and tree-shaking) across your own project.
+Now when building webpack with the production flag (`webpack -p`) only the used `vue-ico` icons will be bundled. This also has the added benefits of of allowing you to use ES6 modules (and tree-shaking) across your project
 
 #### Bundling Usage
 
