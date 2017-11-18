@@ -20,25 +20,40 @@ This package's aim is to get icons into your Vue.js project as quick as possible
 Specify the icon name as kebab or camel case
 (library: https://material.io/icons/)
 
+### Example
+
+http://paulcollett.github.io/vue-ico/demo/
+
 ### Bundling?
 
 - Simply outputs the svg
 - Bundles only the icons you need
 
+First off install the `vue-ico` package
+
 `npm install vue-ico --save-dev`
 
-Configure webpack to support "tree-shaking" to remove _dead code_ (and unused icons):
-http://2ality.com/2015/12/webpack-tree-shaking.html
+**Configure webpack to support "tree-shaking"** to remove _dead code_ (and unused icons):
 
-Note: You'll need to allow `vue-ico` module to be parsed by your webpack JS loader. Commonly all node_modules are excluded from parsing so changing this line:
+When using babel as you JS loader, make sure we're not compiling to commonJs modules by passing `{ modules: false }` as an option.
+```JS
+presets: [ ['es2015', { modules: false }] ]
+```
+
+Also, you'll need to allow `vue-ico` module to be parsed by your webpack JS loader to shake off unused icons. Commonly the `node_modules` folder is excluded from parsing so changing this line:
 ```JS
 exclude: /node_modules/
 ```
-to this will do the trick:
+to this, will exclude all node modules but allow vue-ico to be stripped of dead code:
 ```JS
 exclude: /node_modules\/(?!(vue-ico)\/).*/
 ```
-_...let me know if this needs clarifying_
+Setup & "tree shaking" `webpack.config.js` example:
+https://github.com/paulcollett/vue-ico/blob/master/
+
+Now when building webpack with the production flag (`webpack -p`) only the used `vue-ico` icons will be bundled with the added benefits of being able to use ES6 modules (and tree-shaking) across your own project.
+
+#### Bundling Usage
 
 ```JS
 import VueIco, {icoClose, icoKeyboardArrowDown} from 'vue-ico'
@@ -58,10 +73,6 @@ Import the icon name, prefixed with `ico`, in camelCase
   <li><ico name="down" size="18" color="#f00"></ico></li> <!-- red icon -->
 </ul>
 ```
-
-### Example
-
-http://paulcollett.github.io/vue-ico/demo/
 
 ### Need anything more?
 
