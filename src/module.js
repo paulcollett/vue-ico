@@ -32,7 +32,7 @@ Plugin.install = function (Vue, options) {
         Vue.util.warn(`[VueIco] ${errorMessage}`)
         el.outerHTML = `[?]<!-- ${errorMessage} -->`;
       } else {
-        el.outerHTML = `<!-- errorMessage -->`;
+        el.outerHTML = `<!-- ${errorMessage} -->`;
       }
     }
   });
