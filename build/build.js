@@ -6,7 +6,7 @@ var package = require('../package.json');
 var banner =
     "/*!\n" +
     " * vue-ico v" + package.version + "\n" +
-    " * https://github.com/paulcollett/vue-ico\n" +
+    " * https://https://github.com/POMXARK/vue-ico\n" +
     " * Released under the MIT License.\n" +
     " */\n";
 
