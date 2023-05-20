@@ -15,7 +15,7 @@ Plugin.install = function (Vue, options) {
   options = options || {};
 
   for (const [key, value] of Object.entries(options)) {
-    const namespace = 'ico' + key.charAt(0).toUpperCase() + key.slice(1);
+    const namespace = value['name'];
     Vue.directive(namespace, {
       mounted(el, binding) {
         let icoFn = null;
@@ -55,18 +55,19 @@ Plugin.install = function (Vue, options) {
     },
     render() {
       let vnode = createElementVNode('span');
-      const name = 'ico' + this.name.charAt(0).toUpperCase() + this.name.slice(1)
-      let directives = [[resolveDirective(name)]];
-      let dir, value, arg, modifiers = {};
-      for (let i = 0; i < directives.length; i++) {
-        [dir, value, arg, modifiers = EMPTY_OBJ] = directives[i];
-      }
+      if (options[this.name] !== undefined) {
+        let directives = [[resolveDirective( options[this.name]['name'] )]];
+        let dir, value, arg, modifiers = {};
+        for (let i = 0; i < directives.length; i++) {
+          [dir, value, arg, modifiers = EMPTY_OBJ] = directives[i];
+        }
 
-      return h('span',
-          withDirectives(
-              vnode, [[dir, value, options[this.name], {'size': this.size, 'color': this.color}]]
-          )
-      )
+        return h('span',
+            withDirectives(
+                vnode, [[dir, value, options[this.name], {'size': this.size, 'color': this.color}]]
+            )
+        )
+      }
     }
   });
 };

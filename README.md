@@ -33,7 +33,7 @@ to this, will continue to exclude all node modules except for `vue3-ico`:
 exclude: /node_modules\/(?!(vue3-ico)\/).*/
 ```
 Example of `webpack.config.js` with this "tree shaking" setup:
-https://github.com/paulcollett/vue3-ico/blob/master/webpack-example.md
+https://github.com/paulcollett/vue-ico/blob/master/webpack-example.md
 
 Now when building webpack with the production flag (`webpack -p`) only the used `vue3-ico` icons will be included in your final JS bundle. This also has the added benefits of allowing you to use ES6 modules (and tree-shaking) across your project
 
@@ -42,9 +42,12 @@ Now when building webpack with the production flag (`webpack -p`) only the used 
 Import the icon name, prefixed with `ico`, in camelCase (library: https://material.io/icons/)
 
 ```JS
+import {createApp} from 'vue'
 import VueIco, {icoClose, icoKeyboardArrowDown} from 'vue3-ico'
 
-Vue.use(VueIco, {
+const app = createApp(App)
+
+app.use(VueIco, {
   "close": icoClose,
   "down": icoKeyboardArrowDown
 });
