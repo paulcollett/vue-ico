@@ -1,3 +1,6 @@
+import { h, createElementVNode, resolveDirective, withDirectives } from 'vue'
+import { EMPTY_OBJ } from '@vue/shared';
+
 const icoWrapper = function(svg, s, c) {
   return '<svg fill="' + (c || 'currentcolor') + '" width="' + (s || 24) + '" height="' + (s || 24) + '" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">' + svg + '</svg>';
 };
@@ -11,33 +14,33 @@ Plugin.install = function (Vue, options) {
 
   options = options || {};
 
-  var namespace = options.namespace || 'ico';
+  for (const [key, value] of Object.entries(options)) {
+    const namespace = 'ico' + key.charAt(0).toUpperCase() + key.slice(1);
+    Vue.directive(namespace, {
+      mounted(el, binding) {
+        let icoFn = null;
+        let errorMessage = '';
 
-  Vue.directive(namespace, {
-    inserted: function(el, binding) {
-      let icoFn = null;
-      let errorMessage = '';
+        if (typeof binding.arg === 'function') {
+          icoFn = binding.arg;
+          errorMessage = 'Unknown Icon Function' + (icoFn.name ? ` ${icoFn.name}` : '');
+        } else if (typeof binding.arg === 'string') {
+          icoFn = options[binding.arg] || null;
+          errorMessage = `Unknown Icon: ${binding.arg}`;
+        }
 
-      if(typeof binding.arg === 'function') {
-        icoFn = binding.arg;
-        errorMessage = 'Unknown Icon Function' + (icoFn.name ? ` ${icoFn.name}` : '');
-      } else if(typeof binding.arg === 'string') {
-        icoFn = options[binding.arg] || null;
-        errorMessage = `Unknown Icon: ${binding.arg}`;
+        if (icoFn) {
+          el.innerHTML = icoFn.call(null, binding.modifiers.size, binding.modifiers.color);
+        } else if (Vue.config.productionTip) {
+          console.error('[VueIco]', errorMessage, 'Library: https://material.io/icons/'); // could use vue.util.warn
+          el.innerHTML = `[?]<!-- ${errorMessage} -->`;
+        } else {
+          el.innerHTML = `<!-- ${errorMessage} -->`;
+        }
       }
-
-      if(icoFn) {
-        el.outerHTML = icoFn.call(null, binding.modifier, (binding.value || {}).color);
-      } else if(Vue.config.productionTip) {
-        console.error('[VueIco]', errorMessage, 'Library: https://material.io/icons/'); // could use vue.util.warn
-        el.outerHTML = `[?]<!-- ${errorMessage} -->`;
-      } else {
-        el.outerHTML = `<!-- ${errorMessage} -->`;
-      }
-    }
-  });
-
-  Vue.component(namespace, {
+    });
+  }
+  Vue.component('ico', {
     props: {
       name: {
         type: [String, Function]
@@ -50,17 +53,20 @@ Plugin.install = function (Vue, options) {
         type: [String]
       },
     },
-    render: function (createElement) {
-      var _this = this;
+    render() {
+      let vnode = createElementVNode('span');
+      const name = 'ico' + this.name.charAt(0).toUpperCase() + this.name.slice(1)
+      let directives = [[resolveDirective(name)]];
+      let dir, value, arg, modifiers = {};
+      for (let i = 0; i < directives.length; i++) {
+        [dir, value, arg, modifiers = EMPTY_OBJ] = directives[i];
+      }
 
-      return createElement('span', {
-        directives: [{
-          name: namespace,
-          value: {color: _this.color},
-          arg: _this.name,
-          modifier: _this.size
-        }]
-      });
+      return h('span',
+          withDirectives(
+              vnode, [[dir, value, options[this.name], {'size': this.size, 'color': this.color}]]
+          )
+      )
     }
   });
 };
