@@ -60,6 +60,25 @@ app.use(VueIco, {
 </ul>
 ```
 
+### How to add an icon
+
+```JS
+import {icoWrapper} from 'vue3-ico';
+const icoHomeTwoTone = (s, c) => icoWrapper('<path d="M19,11v9h-5v-6h-4v6H5v-9H3.6L12,3.4l8.4,7.6H19z" opacity=".3"></path><path d="M20,21h-7v-6h-2v6H4v-9H1l11-9.9L23,12h-3V21z M15,19h3v-8.8l-6-5.4l-6,5.4V19h3v-6h6V19z"></path>', s, c);
+
+export {icoHomeTwoTone}
+```
+
+## v 1.0.20 added new parameter viewBox
+```JS
+// google material icons
+const icoMonitoring = (s, c, v) => icoWrapper('<path d="M120 936v-76l60-60v136h-60Zm165 0V700l60-60v296h-60Zm165 0V640l60 61v235h-60Zm165 0V701l60-60v295h-60Zm165 0V540l60-60v456h-60ZM120 700v-85l280-278 160 160 280-281v85L560 582 400 422 120 700Z"/>', s, c, v);
+```
+
+```HTML
+<ico name="graph" viewBox="0 96 960 960"></ico>
+```
+
 ### Need anything more?
 
 We're aiming for simplicity with this package, that means, ready-to-go browser support and simplistic bundling. If you need more control and willing to get your hands dirty around your bundler, take a look at this comprehensive library:
